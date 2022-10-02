@@ -1,0 +1,55 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+features:
+  - fullTextSearch
+dataSources:
+  - kind: ethereum
+    name: loot
+    network: mainnet
+    source:
+      address: "0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+      abi: Loot
+      startBlock: 13108877
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: Loot
+          file: loot/abis/Loot.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleLootTransfer
+      file: loot/loot.wasm
+  - kind: ethereum
+    name: helms
+    network: mainnet
+    source:
+      address: "0xf54fd25cf570c90b4821ef212d58687a13c5d2a5"
+      abi: Helms
+      startBlock: 14548934
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Claimed
+        - Minted
+        - TransferBatch
+        - TransferSingle
+      abis:
+        - name: Helms
+          file: helms/abis/Helms.json
+      eventHandlers:
+        - event: Claimed(uint256)
+          handler: handleClaimed
+        - event: Minted(uint256)
+          handler: handleMinted
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: loot/loot.wasm

@@ -1,0 +1,10 @@
+{
+  "mainnet": {
+    "H4L": {
+      "address": "0xf54fd25cf570c90b4821ef212d58687a13c5d2a5"
+    },
+    "Loot": {
+      "address": "0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7"
+    }
+  }
+}
